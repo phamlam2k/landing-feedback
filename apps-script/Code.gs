@@ -1,4 +1,10 @@
 /**
+ * @OnlyCurrentDoc
+ * Chỉ xin quyền truy cập ĐÚNG Google Sheet chứa script này (không đụng Drive, Gmail…),
+ * để Google không chặn vì "ứng dụng truy cập thông tin nhạy cảm".
+ */
+
+/**
  * TRẠM SẠC CẢM XÚC: Backend Google Sheets (Google Apps Script)
  *
  * Cách dùng: xem README.md. Tóm tắt:
@@ -21,9 +27,6 @@ const HEADERS = [
 const MOODS = ['Cạn pin', 'Pin yếu', 'Tạm ổn', 'Khá ổn', 'Đầy năng lượng'];
 const DEPARTMENTS = ['Ban Giám Đốc', 'HCNS', 'Chuyên môn', 'Tất cả'];
 const MAX_LEN = 3000;
-
-// (Tuỳ chọn) Email nhận thông báo mỗi khi có phản hồi mới. Để trống = tắt.
-const NOTIFY_EMAIL = '';
 
 /* ================= API ================= */
 
@@ -66,7 +69,6 @@ function doPost(e) {
     sheet.appendRow(row);
     lock.releaseLock();
 
-    if (NOTIFY_EMAIL) notify_(row);
     return json_({ ok: true, id: id });
   } catch (err) {
     console.error(err);
@@ -203,11 +205,4 @@ function moodOf_(v) {
 
 function json_(obj) {
   return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(ContentService.MimeType.JSON);
-}
-
-function notify_(row) {
-  try {
-    const body = HEADERS.slice(0, 10).map((h, i) => `${h}: ${row[i] || '-'}`).join('\n');
-    MailApp.sendEmail(NOTIFY_EMAIL, '🔋 Trạm Sạc Cảm Xúc: có phản hồi mới #' + row[10], body);
-  } catch (err) { console.error(err); }
 }

@@ -49,7 +49,8 @@ landing-feedback/
 ├── app.js              # Logic: chuyển bước, slider, validate, gửi dữ liệu, pháo giấy
 ├── config.js           # ⚙ URL Google Sheet + danh sách bộ phận
 ├── apps-script/
-│   └── Code.gs         # Backend Google Apps Script (dán vào Sheet, không chạy trên Vercel)
+│   ├── Code.gs         # Backend Google Apps Script (dán vào Sheet, không chạy trên Vercel)
+│   └── appsscript.json # Manifest: chỉ xin quyền truy cập đúng Sheet đó
 └── README.md
 ```
 
@@ -86,7 +87,13 @@ Mất khoảng 5 phút và chỉ cần làm một lần.
 
 > ⚠️ Mỗi lần **sửa `Code.gs`**, cần vào **Triển khai → Quản lý triển khai → ✏ Chỉnh sửa → Phiên bản: Phiên bản mới → Triển khai** thì thay đổi mới có hiệu lực. URL giữ nguyên.
 
-**Nhận email khi có phản hồi mới (tuỳ chọn):** điền địa chỉ vào `NOTIFY_EMAIL` trong `Code.gs`, rồi triển khai phiên bản mới. Lưu ý email sẽ chứa nội dung phản hồi.
+### Quyền tối thiểu (tránh bị Google chặn)
+Script chỉ xin **một quyền duy nhất**: đọc/ghi *đúng Google Sheet chứa nó* (`spreadsheets.currentonly`). Nó không đụng tới Drive, Gmail hay dữ liệu nào khác. Để khoá cứng điều này, làm thêm bước sau **trước khi chạy `setup`**:
+
+1. Trong Apps Script, vào **⚙ Cài đặt dự án** và tick **“Hiển thị tệp kê khai appsscript.json trong trình chỉnh sửa”**.
+2. Quay lại **Trình chỉnh sửa**, mở `appsscript.json` và thay toàn bộ nội dung bằng file `apps-script/appsscript.json` trong repo, rồi bấm Lưu.
+
+> Nếu gặp lỗi *“Ứng dụng này đã cố truy cập thông tin nhạy cảm… Google đã chặn”*, xem mục [Xử lý sự cố](#9-xử-lý-sự-cố).
 
 ---
 
@@ -190,6 +197,7 @@ Tự cập nhật bằng công thức:
 
 | Hiện tượng | Nguyên nhân & cách xử lý |
 |---|---|
+| Google báo *“Ứng dụng này đã cố truy cập thông tin nhạy cảm… đã chặn”* khi chạy `setup` | (1) Dùng `Code.gs` bản mới nhất (đã bỏ quyền gửi email) và dán `appsscript.json` như mục 4. Sau đó chạy lại `setup`. (2) Nếu vẫn bị chặn và bạn đang dùng **tài khoản Google công ty (Workspace)**: quản trị viên đang chặn mọi ứng dụng chưa xác minh. Hãy tạo Sheet bằng **tài khoản Gmail cá nhân**, hoặc nhờ admin vào *Admin Console → Bảo mật → Kiểm soát API → Quyền truy cập ứng dụng* để cho phép. (3) Tài khoản đang bật *Chương trình Bảo vệ Nâng cao* cũng chặn kiểu này, nên dùng tài khoản khác. |
 | Hiện thông báo “Chế độ demo” | `SHEET_ENDPOINT` còn trống, cần dán URL `/exec` vào `config.js` rồi deploy lại. |
 | Báo “Trạm đang mất sóng…” khi gửi | URL sai (phải kết thúc bằng `/exec`, không phải `/dev`), hoặc quyền truy cập Web App chưa đặt là **Bất kỳ ai**. Mở URL trên trình duyệt để kiểm tra. |
 | Sửa `Code.gs` mà không thấy thay đổi | Chưa triển khai **phiên bản mới** (mục 4). |
