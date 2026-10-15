@@ -40,7 +40,7 @@ function doPost(e) {
     const missing =
       clean_(data.vent).length < 10 ||
       clean_(data.idea).length < 10 ||
-      DEPARTMENTS.indexOf(data.department) < 0 ||
+      !matchOne_(data.department, DEPARTMENTS) ||
       clean_(data.thanksTo, 120).length < 2 ||
       clean_(data.thanksMsg).length < 10 ||
       (data.mode === 'named' && clean_(data.senderName, 80).length < 2);
@@ -55,9 +55,9 @@ function doPost(e) {
     const row = [
       new Date(),
       battery,
-      MOODS.indexOf(data.mood) >= 0 ? data.mood : moodOf_(battery),
+      matchOne_(data.mood, MOODS) || moodOf_(battery),
       clean_(data.vent),
-      DEPARTMENTS.indexOf(data.department) >= 0 ? data.department : '',
+      matchOne_(data.department, DEPARTMENTS),
       clean_(data.idea),
       clean_(data.thanksTo, 120),
       clean_(data.thanksMsg),
@@ -192,11 +192,25 @@ function buildStats_() {
 /* ================= HELPERS ================= */
 
 function clean_(v, max) {
-  let s = String(v == null ? '' : v).replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F]/g, '').trim();
+  let s = String(v == null ? '' : v).replace(/[\u0300-\u036f]/g, '').trim();
   s = s.slice(0, max || MAX_LEN);
   // Chống chèn công thức (formula injection) vào Sheet
   if (/^[=+\-@]/.test(s)) s = "'" + s;
   return s;
+}
+
+// So khớp không phụ thuộc kiểu mã hoá dấu tiếng Việt (dựng sẵn / tổ hợp), hoa thường, khoảng trắng.
+// Trả về đúng giá trị trong danh sách của server để tab Thống kê đếm chính xác.
+function matchOne_(value, list) {
+  const k = key_(value);
+  if (!k) return '';
+  for (let i = 0; i < list.length; i++) if (key_(list[i]) === k) return list[i];
+  return '';
+}
+
+function key_(s) {
+  return String(s == null ? '' : s).normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[đĐ]/g, 'd').toLowerCase().replace(/\s+/g, ' ').trim();
 }
 
 function moodOf_(v) {
