@@ -141,23 +141,11 @@
 
   /* ---------------- Validate dễ thương ---------------- */
   const CUTE = {
-    vent: {
-      empty: ['Trạm vểnh tai nãy giờ mà chưa nghe thấy gì nè 👂🥺', 'Kể Trạm nghe một xíu thôi cũng được mà 🫶', 'Ổn áp thì cứ khoe “Hôm nay ổn áp” nha 😆'],
-      short: k => `Thêm ${k} ký tự nữa thôi là Trạm hiểu cậu rồi 🔋`,
-    },
     idea: {
       empty: ['Ý tưởng nhỏ xíu cũng là ý tưởng đó, viết thử đi nè 💡', 'Bóng đèn đang chờ cậu bật sáng nè ✨', 'Thêm trà bánh cũng tính là góp ý nha 🍪'],
       short: k => `Gần sáng đèn rồi, thêm ${k} ký tự nữa nha 💡`,
     },
     dept: { empty: ['Góp ý này gửi về đâu ta? Chọn giúp Trạm một bộ phận nha 📮', 'Chưa chọn bộ phận nè, bưu tá Trạm bối rối quá 🥹'] },
-    thanksTo: {
-      empty: ['Lời cảm ơn này gửi tới ai đây ta? 🤔💌', 'Ghi tên người được cảm ơn để Trạm chuyển tới đúng người nha 🕊️'],
-      short: () => 'Tên gì mà ngắn xíu vậy nè, ghi rõ hơn chút nha 🤏',
-    },
-    thanksMsg: {
-      empty: ['Viết vài dòng thôi, người nhận sẽ vui lắm đó 🥰', 'Trái tim đang chờ được gửi đi nè 💗'],
-      short: k => `Ngọt thêm ${k} ký tự nữa là tròn vị luôn 🍯`,
-    },
     senderName: {
       empty: ['Cậu là ai thế? Nhập tên giúp Trạm, hoặc chọn ẩn danh cũng được nha 🙈'],
       short: () => 'Tên ngắn xíu vậy, ghi rõ hơn chút nha 🙋',
