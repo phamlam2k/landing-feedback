@@ -37,10 +37,8 @@ function doPost(e) {
     if (data.website) return json_({ ok: true, id: 'OK' }); // bot điền honeypot => bỏ qua
 
     // Kiểm tra nội dung bắt buộc (khớp với validate trên trang)
-    // Chỉ bắt buộc: nội dung góp ý (và tên nếu chọn "Ghi tên")
-    const missing =
-      clean_(data.idea).length < 10 ||
-      (data.mode === 'named' && clean_(data.senderName, 80).length < 2);
+    // Chỉ bắt buộc: tên người gửi nếu chọn "Ghi tên"
+    const missing = data.mode === 'named' && clean_(data.senderName, 80).length < 2;
     if (missing) return json_({ ok: false, error: 'Thiếu nội dung bắt buộc' });
 
     lock.waitLock(10000);

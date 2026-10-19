@@ -141,10 +141,6 @@
 
   /* ---------------- Validate dễ thương ---------------- */
   const CUTE = {
-    idea: {
-      empty: ['Ý tưởng nhỏ xíu cũng là ý tưởng đó, viết thử đi nè 💡', 'Bóng đèn đang chờ cậu bật sáng nè ✨', 'Thêm trà bánh cũng tính là góp ý nha 🍪'],
-      short: k => `Gần sáng đèn rồi, thêm ${k} ký tự nữa nha 💡`,
-    },
     senderName: {
       empty: ['Cậu là ai thế? Nhập tên giúp Trạm, hoặc chọn ẩn danh cũng được nha 🙈'],
       short: () => 'Tên ngắn xíu vậy, ghi rõ hơn chút nha 🙋',

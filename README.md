@@ -28,7 +28,7 @@ Landing page hòm thư tâm tư nội bộ: một không gian ấm áp, an toàn
 | **Header** | Tiêu đề “TRẠM SẠC CẢM XÚC”, lời giới thiệu, minh hoạ trạm sạc có animation | — |
 | **Check-in cảm xúc** | Thanh kéo mức pin 0–100% và 5 nút mặt cười chọn nhanh; cục pin đổi màu, đổi nét mặt theo mức pin | Luôn có giá trị |
 | **Bước 1 · Thở phào** | Bài thở 4 giây và ô xả tâm sự | Không |
-| **Bước 2 · Góp ý** | "Lời nhắn nhủ này dành cho:" (Ban Tổng Giám đốc / Phòng HCNS / Phòng ban chuyên môn / Tất cả) và ô góp ý | **Có**: nội dung ≥ 10 ký tự (chọn người nhận không bắt buộc) |
+| **Bước 2 · Góp ý** | "Lời nhắn nhủ này dành cho:" (Ban Tổng Giám đốc / Phòng HCNS / Phòng ban chuyên môn / Tất cả) và ô góp ý | Không |
 | **Bước 3 · Cảm ơn** | Tên người nhận, lời nhắn, chọn **🥷 Ẩn danh** hoặc **🙋 Ghi tên** | Không (chỉ cần tên người gửi nếu chọn Ghi tên) |
 | **Thank-you** | Pin đầy 100% nhấp nháy, pháo giấy, mã phản hồi, nút “Gửi thêm một tâm tư khác” | — |
 
