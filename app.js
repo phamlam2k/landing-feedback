@@ -113,7 +113,7 @@
 
   /* ---------------- Trang 3: bộ phận ---------------- */
   const deptWrap = $('#deptPicks');
-  (CFG.DEPARTMENTS || ['Ban Giám Đốc', 'HCNS', 'Chuyên môn', 'Tất cả']).forEach(name => {
+  (CFG.DEPARTMENTS || ['Ban Tổng Giám đốc', 'Phòng HCNS', 'Phòng ban chuyên môn', 'Tất cả']).forEach(name => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'dept'; b.textContent = name;
     b.setAttribute('role', 'radio'); b.setAttribute('aria-checked', 'false');
@@ -145,7 +145,6 @@
       empty: ['Ý tưởng nhỏ xíu cũng là ý tưởng đó, viết thử đi nè 💡', 'Bóng đèn đang chờ cậu bật sáng nè ✨', 'Thêm trà bánh cũng tính là góp ý nha 🍪'],
       short: k => `Gần sáng đèn rồi, thêm ${k} ký tự nữa nha 💡`,
     },
-    dept: { empty: ['Góp ý này gửi về đâu ta? Chọn giúp Trạm một bộ phận nha 📮', 'Chưa chọn bộ phận nè, bưu tá Trạm bối rối quá 🥹'] },
     senderName: {
       empty: ['Cậu là ai thế? Nhập tên giúp Trạm, hoặc chọn ẩn danh cũng được nha 🙈'],
       short: () => 'Tên ngắn xíu vậy, ghi rõ hơn chút nha 🙋',
@@ -191,7 +190,6 @@
       const len = f.value.trim().length;
       if (len < min) errs.push([f.id, len ? CUTE[f.id].short(min - len) : pick(CUTE[f.id].empty), f]);
     };
-    if (n === 2 && !department) errs.push(['dept', pick(CUTE.dept.empty), deptWrap]);
     $$('[data-min]', step).forEach(f => check(f, +f.dataset.min));
     if (n === 3 && form.mode.value === 'named') check(nameInput, 2);
     if (!errs.length) return true;

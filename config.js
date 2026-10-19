@@ -4,6 +4,6 @@
 // Để trống => chạy chế độ DEMO (không gửi đi đâu, chỉ log ra console).
 window.TRAM_SAC_CONFIG = {
   SHEET_ENDPOINT: 'https://script.google.com/macros/s/AKfycbyh64k2DFtGTkG9ivjhGUUqDJFG2S45bxSWKzojgE_0K4nFSH0MxZPkJ0mNyyikYxvl/exec',
-  // Danh sách bộ phận trong dropdown "Góp ý này dành cho bộ phận nào?"
-  DEPARTMENTS: ['Ban Giám Đốc', 'HCNS', 'Chuyên môn', 'Tất cả'],
+  // Các lựa chọn "Lời nhắn nhủ này dành cho:" (không bắt buộc)
+  DEPARTMENTS: ['Ban Tổng Giám đốc', 'Phòng HCNS', 'Phòng ban chuyên môn', 'Tất cả'],
 };

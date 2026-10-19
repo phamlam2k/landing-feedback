@@ -55,6 +55,7 @@ button, input, textarea, select { font: inherit; color: inherit; }
   padding: 28px 16px 16px;
   display: grid; gap: 8px; align-items: center;
 }
+.brand-logo { display: block; width: clamp(140px, 36vw, 190px); height: auto; margin: 0 0 18px; animation: rise .9s var(--ease-out) both; }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 13px; font-weight: 600; color: var(--terra-deep);
